@@ -10,16 +10,23 @@ public class Main {
     private HashMap<Integer, Boolean> visited = new HashMap<>();
 
     private int t;
-    private HashMap<Integer, Integer> f = new HashMap<>();
+    private TreeMap<Integer, Integer> f = new TreeMap<>(Collections.reverseOrder());
+    private List<Integer> components = new ArrayList<>();
 
     public static void main(String[] args) {
         System.out.println("Starting DFS");
         Main main = new Main();
         main.buildGraph();
-//        main.strongConnectedComponent(main.getGraph());
+        main.strongConnectedComponent();
+        System.out.println(main.getComponents());
+
 //        System.out.println(main.getF());
-        System.out.println(main.getGraph());
-        System.out.println(main.getT_graph());
+//        System.out.println(main.getGraph());
+//        System.out.println(main.getT_graph());
+    }
+
+    public List<Integer> getComponents() {
+        return components;
     }
 
     public HashMap<Integer, ArrayList<Integer>> getGraph() {
@@ -30,21 +37,32 @@ public class Main {
         return t_graph;
     }
 
-    public HashMap<Integer, Integer> getF() {
+    public TreeMap<Integer, Integer> getF() {
         return f;
     }
 
-    private void strongConnectedComponent(HashMap<Integer, ArrayList<Integer>> graph) {
+    private void strongConnectedComponent() {
         DFSLoop(graph);
+        DFSLoopT();
     }
 
     private void DFSLoop(HashMap<Integer, ArrayList<Integer>> graph) {
         graph.forEach((integer, integers) -> {
             if (!visited.containsKey(integer)) {
-                System.out.println("DFSLoop " + integer);
                 DFSR(graph, integer);
             }
         });
+    }
+
+    private void DFSLoopT() {
+        visited = new HashMap<>();
+        f.forEach(((integer, integer2) -> {
+            if (!visited.containsKey(integer2)) {
+                t = 0;
+                DFSRT(t_graph, integer2);
+                components.add(t);
+            }
+        }));
     }
 
     private void DFSR(HashMap<Integer, ArrayList<Integer>> graph, int start) {
@@ -55,7 +73,17 @@ public class Main {
             }
         });
         t++;
-        f.put(start, t);
+        f.put(t,start);
+    }
+
+    private void DFSRT(HashMap<Integer, ArrayList<Integer>> graph, int start) {
+        visited.put(start, true);
+        graph.get(start).forEach(integer -> {
+            if (!visited.containsKey(integer)) {
+                DFSRT(graph, integer);
+            }
+        });
+        t++;
     }
 
     private void buildGraph() {
