@@ -140,8 +140,8 @@ public class Main {
     }
 
     private void buildGraph() {
-//        try (Scanner scanner = new Scanner(new File("src/test_08/test_08_2.txt"))) {
-        try (Scanner scanner = new Scanner(new File("src/test_08/input_08.txt"))) {
+        try (Scanner scanner = new Scanner(new File("src/test_08/test_08_2.txt"))) {
+//        try (Scanner scanner = new Scanner(new File("src/test_08/input_08.txt"))) {
 
             while (scanner.hasNext()) {
                 String s = scanner.nextLine();
