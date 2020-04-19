@@ -18,7 +18,8 @@ class Solution {
     public int numIslands(char[][] grid) {
 
         int[][] dirs = {{-1,0}, {0,1}, {1,0}, {0,-1}};
-
+//        PriorityQueue<int[][]> pQueue = new PriorityQueue<>();
+//        pQueue.add()
         int islands = 0;
 
         for (int i = 0; i < grid.length; i++) {
