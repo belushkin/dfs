@@ -1,3 +1,5 @@
+package codeforces;
+
 public class JumpLength {
 
     private boolean finish;

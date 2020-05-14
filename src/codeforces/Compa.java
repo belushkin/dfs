@@ -1,3 +1,4 @@
+package codeforces;
 
 public class Compa {
 
